@@ -1,19 +1,80 @@
-<h1>Credible Blooms Limited</h1>
-<h2>Return Asset</h2>
-<form method="post">
-  <label>Select Assigned Asset:</label>
-  <select name="asset_id">
-    {% for asset in assets %}
-      <option value="{{ asset.id }}">{{ asset.name }} - {{ asset.category }} ({{ asset.assigned_to }})</option>
-    {% endfor %}
-  </select><br>
-<h1> Ensure the condition is selected</h1>
-  <label>Condition Upon Return:</label>
-  <select name="condition" required>
-    <option value="usable">Usable</option>
-    <option value="unusable">Unusable</option>
-  </select><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Return Asset</title>
+    <style>
+        .topic {
+            background: purple;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
 
-  <button type="submit">Return</button>
-</form>
-<a href="/">Back to Home</a>
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            flex: 1;
+        }
+
+        nav ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px;
+            text-decoration: none;
+        }
+
+        nav ul li a:hover {
+            background-color: #575757;
+        }
+    </style>
+</head>
+<body>
+    <div class="topic">
+        <h1>CREDIBLE BLOOMS LIMITED</h1>
+        <h2>IT Inventory System</h2>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('add_asset') }}">➕ Add Asset</a></li>
+            <li><a href="{{ url_for('assign_asset') }}">🧾 Assign Asset</a></li>
+            <li><a href="{{ url_for('return_asset') }}">🔄 Return Asset</a></li>
+            <li><a href="{{ url_for('report') }}">📊 View Reports</a></li>
+        </ul>
+    </nav>
+
+    <h2>Return Asset</h2>
+    <form method="post">
+        <label>Select Assigned Asset:</label>
+        <select name="asset_id">
+            {% for asset in assets %}
+                <option value="{{ asset.id }}">{{ asset.name }} - {{ asset.category }} ({{ asset.assigned_to }})</option>
+            {% endfor %}
+        </select><br>
+
+        <h1>Ensure the condition is selected</h1>
+        <label>Condition Upon Return:</label>
+        <select name="condition" required>
+            <option value="usable">Usable</option>
+            <option value="unusable">Unusable</option>
+        </select><br>
+
+        <button type="submit">Return</button>
+    </form>
+
+    <p><a href="{{ url_for('home') }}">⬅ Back to Home</a></p>
+    <marquee>Blooming all the way</marquee>
+</body>
+</html>

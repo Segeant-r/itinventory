@@ -1,18 +1,79 @@
-<h2>Assign Asset</h2>
-<form method="post">
-  <label>User:</label>
-  <input type="text" name="assigned_to" required><br>
-  
-  <label>Category:</label>
-  <input type="text" name="category" required><br>
-  
-  <label>Select Available Asset:</label>
-  <select name="asset_id">
-    {% for asset in assets %}
-      <option value="{{ asset.id }}">{{ asset.name }} - {{ asset.category }}</option>
-    {% endfor %}
-  </select><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assign Asset</title>
+    <style>
+        .topic {
+            background: purple;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
 
-  <button type="submit">Assign</button>
-</form>
-<a href="/">Back to Home</a>
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            flex: 1;
+        }
+
+        nav ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px;
+            text-decoration: none;
+        }
+
+        nav ul li a:hover {
+            background-color: #575757;
+        }
+    </style>
+</head>
+<body>
+    <div class="topic">
+        <h1>CREDIBLE BLOOMS LIMITED</h1>
+        <h2>IT Inventory System</h2>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('add_asset') }}">➕ Add Asset</a></li>
+            <li><a href="{{ url_for('assign_asset') }}">🧾 Assign Asset</a></li>
+            <li><a href="{{ url_for('return_asset') }}">🔄 Return Asset</a></li>
+            <li><a href="{{ url_for('report') }}">📊 View Reports</a></li>
+        </ul>
+    </nav>
+
+    <h2>Assign Asset</h2>
+    <form method="post">
+        <label>User:</label>
+        <input type="text" name="assigned_to" required><br>
+
+        <label>Category:</label>
+        <input type="text" name="category" required><br>
+
+        <label>Select Available Asset:</label>
+        <select name="asset_id">
+            {% for asset in assets %}
+                <option value="{{ asset.id }}">{{ asset.name }} - {{ asset.category }}</option>
+            {% endfor %}
+        </select><br>
+
+        <button type="submit">Assign</button>
+    </form>
+
+    <p><a href="{{ url_for('home') }}">⬅ Back to Home</a> | <a href="{{ url_for('logout') }}">Logout</a></p>
+    <marquee>Blooming all the way</marquee>
+</body>
+</html>

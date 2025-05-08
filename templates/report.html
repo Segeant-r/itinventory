@@ -29,30 +29,77 @@
             width: 80%;
             margin: 0 auto;
         }
-        .chart_container{
+        .chart_container {
             width: 300px;
             margin: 20px auto;
         }
         .bar-chart-container {
-        width: 500px; /* or any width you prefer */
-        margin: 20px auto;
-        align-items: left;
+            width: 500px;
+            margin: 20px auto;
         }
         .chart-section {
-          display: flex;
-          justify-content: space-between;
-        align-items: flex-start;
-        gap: 40px;
-        margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 40px;
+            margin-top: 20px;
         }
-        
+
         canvas {
             margin-top: 20px;
         }
+        .topic {
+            background-color: purple;
+        }
+
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            flex: 1;
+        }
+
+        nav ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px;
+            text-decoration: none;
+        }
+
+        nav ul li a:hover {
+            background-color: #575757;
+        }
     </style>
 </head>
+
 <body>
+    <div class="topic">
+        <h1><center>Credible Blooms Limited</center></h1>
+        <h1><center>Asset Report</center></h1>
+    </div>
+
+    <!-- Navbar -->
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('add_asset') }}">➕ Add Asset</a></li>
+            <li><a href="{{ url_for('assign_asset') }}">🧾 Assign Asset</a></li>
+            <li><a href="{{ url_for('return_asset') }}">🔄 Return Asset</a></li>
+            <li><a href="{{ url_for('report') }}">📊 View Reports</a></li>
+        </ul>
+    </nav>
+
     <p><button><a href="{{ url_for('home') }}">Home</a></button></p>
+
     <div class="container">
         <h2>Inventory Report</h2>
 
@@ -85,20 +132,21 @@
         </table>
 
         <!-- Graphs Section -->
-         <div class="chart-section">
-        <h3>Asset Distribution</h3>
-        <div class="chart_container">
-        <canvas id="assetChart" width="100" height="80"></canvas>
-        </div>
+        <div class="chart-section">
+            <h3>Asset Distribution</h3>
+            <div class="chart_container">
+                <canvas id="assetChart" width="100" height="80"></canvas>
+            </div>
 
-        <h3>Asset Status Distribution</h3>
-        <div class="bar-chart-container">
-        <canvas id="statusChart" width="100" height="80"></canvas>
-        </div>
+            <h3>Asset Status Distribution</h3>
+            <div class="bar-chart-container">
+                <canvas id="statusChart" width="100" height="80"></canvas>
+            </div>
         </div>
 
         <!-- Back to home link -->
-        
+        <p><a href="{{ url_for('home') }}">⬅ Back to Home</a></p>
+
     </div>
 
     <!-- Chart.js Scripts -->
@@ -142,42 +190,29 @@
         });
     </script>
 
-<!-- <p><a href="{{ url_for('home') }}">← Back to Home</a></p> -->
-<div class="container">
-    <h2>Asset Report</h2>
-    <!-- <p><a href="{{ url_for('home') }}">← Back to Home</a></p>
-
-    <h3>Total Assets: {{ total }}</h3>
-    <h3>Assigned Assets: {{ assigned }}</h3>
-    <h3>Unassigned Assets: {{ unassigned }}</h3>
-    <h3>Unusable Assets: {{ unusable }}</h3> -->
-
-    <h3>Assigned Assets Details</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Asset Name</th>
-                <th>Category</th>
-                <th>Assigned To</th>
-                <th>Assigned Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in report_data %}
-            <tr>
-                <td>{{ item.asset_name }}</td>
-                <td>{{ item.category }}</td>
-                <td>{{ item.assigned_to }}</td>
-                <td>{{ item.assigned_date }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-    
-</div>
+    <div class="container">
+        <h3>Assigned Assets Details</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Asset Name</th>
+                    <th>Category</th>
+                    <th>Assigned To</th>
+                    <th>Assigned Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in report_data %}
+                <tr>
+                    <td>{{ item.asset_name }}</td>
+                    <td>{{ item.category }}</td>
+                    <td>{{ item.assigned_to }}</td>
+                    <td>{{ item.assigned_date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
 </body>
 </html>
-
-
