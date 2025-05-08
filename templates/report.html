@@ -98,7 +98,7 @@
         </div>
 
         <!-- Back to home link -->
-        <p><button><a href="{{ url_for('home') }}">Home</a></button></p>
+        
     </div>
 
     <!-- Chart.js Scripts -->
@@ -143,6 +143,39 @@
     </script>
 
 <!-- <p><a href="{{ url_for('home') }}">← Back to Home</a></p> -->
+<div class="container">
+    <h2>Asset Report</h2>
+    <!-- <p><a href="{{ url_for('home') }}">← Back to Home</a></p>
+
+    <h3>Total Assets: {{ total }}</h3>
+    <h3>Assigned Assets: {{ assigned }}</h3>
+    <h3>Unassigned Assets: {{ unassigned }}</h3>
+    <h3>Unusable Assets: {{ unusable }}</h3> -->
+
+    <h3>Assigned Assets Details</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Asset Name</th>
+                <th>Category</th>
+                <th>Assigned To</th>
+                <th>Assigned Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in report_data %}
+            <tr>
+                <td>{{ item.asset_name }}</td>
+                <td>{{ item.category }}</td>
+                <td>{{ item.assigned_to }}</td>
+                <td>{{ item.assigned_date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    
+</div>
 
 </body>
 </html>

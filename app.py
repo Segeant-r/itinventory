@@ -15,6 +15,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
+    department_id = db.Column(db.Integer, db.ForeignKey('department.id'), nullable=False)  # Added department
 
 class Asset(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -30,6 +31,12 @@ class ReturnedAsset(db.Model):
     returned_by = db.Column(db.String(100))
     condition = db.Column(db.String(100))  # usable or unusable
     returned_date = db.Column(db.DateTime, default=datetime.utcnow)
+
+class Department(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), unique=True, nullable=False)
+    users = db.relationship('User', backref='department', lazy=True)
+
 
 # ========== ROUTES ==========
 @app.route('/')
@@ -143,13 +150,27 @@ def report():
     if 'user' not in session:
         return redirect('/login')
 
+    # Fetch all assets that are assigned
+    assigned_assets = Asset.query.filter_by(status='assigned').all()
+
+    # Prepare the report data
+    report_data = []
+    for asset in assigned_assets:
+        report_data.append({
+            'asset_name': asset.name,
+            'category': asset.category,
+            'assigned_to': asset.assigned_to,
+            'assigned_date': asset.assigned_date
+        })
+
     total_assets = Asset.query.count()
-    assigned_assets = Asset.query.filter_by(status='assigned').count()
+    assigned_assets_count = len(report_data)  # Count assigned assets
     unassigned_assets = Asset.query.filter_by(status='unassigned').count()
     unusable_assets = Asset.query.filter_by(status='unusable').count()
 
-    return render_template('report.html', total=total_assets, assigned=assigned_assets,
-                           unassigned=unassigned_assets, unusable=unusable_assets)
+    return render_template('report.html', total=total_assets, assigned=assigned_assets_count,
+                           unassigned=unassigned_assets, unusable=unusable_assets, report_data=report_data)
+
 
 # ========== INITIALIZE ==========
 if __name__ == '__main__':
