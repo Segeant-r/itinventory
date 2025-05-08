@@ -1,8 +1,23 @@
 <!DOCTYPE html>
-<h1>CREDIBLE BLOOMS LIMITED</h1>
+<head>
+    <style>
+        .topic{
+            background: purple;
+        }
+        .user{
+            align-items: first baseline;
+        }
+
+    </style>
+</head>
+<div class="topic">
+<h1><center>CREDIBLE BLOOMS LIMITED</center></h1>
 <h2><center>IT Inventory System</center></h2>
+</div>
+<div class="user">
 <h1>Welcome, {{ session['user'] }}</h1>
-<a href="/add_asset">Add Asset</a> | <a href="/logout">Logout</a>
+</div>
+<!-- <a href="/add_asset">Add Asset</a> | <a href="/logout">Logout</a> -->
 
 <ul>
   <li><a href="{{ url_for('add_asset') }}">➕ Add Asset</a></li>

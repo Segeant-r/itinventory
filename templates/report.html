@@ -29,13 +29,30 @@
             width: 80%;
             margin: 0 auto;
         }
+        .chart_container{
+            width: 300px;
+            margin: 20px auto;
+        }
+        .bar-chart-container {
+        width: 500px; /* or any width you prefer */
+        margin: 20px auto;
+        align-items: left;
+        }
+        .chart-section {
+          display: flex;
+          justify-content: space-between;
+        align-items: flex-start;
+        gap: 40px;
+        margin-top: 20px;
+        }
+        
         canvas {
             margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <p><a href="{{ url_for('home') }}">← Back to Home</a></p>
+    <p><button><a href="{{ url_for('home') }}">Home</a></button></p>
     <div class="container">
         <h2>Inventory Report</h2>
 
@@ -68,14 +85,20 @@
         </table>
 
         <!-- Graphs Section -->
+         <div class="chart-section">
         <h3>Asset Distribution</h3>
-        <canvas id="assetChart" width="400" height="200"></canvas>
+        <div class="chart_container">
+        <canvas id="assetChart" width="100" height="80"></canvas>
+        </div>
 
         <h3>Asset Status Distribution</h3>
-        <canvas id="statusChart" width="400" height="200"></canvas>
+        <div class="bar-chart-container">
+        <canvas id="statusChart" width="100" height="80"></canvas>
+        </div>
+        </div>
 
         <!-- Back to home link -->
-        <p><a href="{{ url_for('home') }}">← Back to Home</a></p>
+        <p><button><a href="{{ url_for('home') }}">Home</a></button></p>
     </div>
 
     <!-- Chart.js Scripts -->
@@ -119,7 +142,7 @@
         });
     </script>
 
-<p><a href="{{ url_for('home') }}">← Back to Home</a></p>
+<!-- <p><a href="{{ url_for('home') }}">← Back to Home</a></p> -->
 
 </body>
 </html>
