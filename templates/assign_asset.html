@@ -1,0 +1,18 @@
+<h2>Assign Asset</h2>
+<form method="post">
+  <label>User:</label>
+  <input type="text" name="assigned_to" required><br>
+  
+  <label>Category:</label>
+  <input type="text" name="category" required><br>
+  
+  <label>Select Available Asset:</label>
+  <select name="asset_id">
+    {% for asset in assets %}
+      <option value="{{ asset.id }}">{{ asset.name }} - {{ asset.category }}</option>
+    {% endfor %}
+  </select><br>
+
+  <button type="submit">Assign</button>
+</form>
+<a href="/">Back to Home</a>

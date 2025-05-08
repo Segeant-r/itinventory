@@ -1,0 +1,18 @@
+<h2>Return Asset</h2>
+<form method="post">
+  <label>Select Assigned Asset:</label>
+  <select name="asset_id">
+    {% for asset in assets %}
+      <option value="{{ asset.id }}">{{ asset.name }} - {{ asset.category }} ({{ asset.assigned_to }})</option>
+    {% endfor %}
+  </select><br>
+
+  <label>Condition Upon Return:</label>
+  <select name="condition" required>
+    <option value="usable">Usable</option>
+    <option value="unusable">Unusable</option>
+  </select><br>
+
+  <button type="submit">Return</button>
+</form>
+<a href="/">Back to Home</a>
